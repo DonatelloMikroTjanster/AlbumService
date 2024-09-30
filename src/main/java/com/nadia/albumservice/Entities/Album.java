@@ -16,8 +16,8 @@ public class Album {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "release_date")
@@ -33,9 +33,6 @@ public class Album {
     private Set<Artist> artists;
 
 
-    //Getters & setters
-
-
     public Long getId() {
         return id;
     }
@@ -44,12 +41,12 @@ public class Album {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getReleaseDate() {
@@ -58,5 +55,21 @@ public class Album {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
     }
 }

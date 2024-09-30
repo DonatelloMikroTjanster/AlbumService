@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "artist")
 public class Artist {
 
     @Id
@@ -16,12 +17,16 @@ public class Artist {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Column(name = "genre", nullable = false, length = 100)
+    private String genre;
+
     @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY)
     private Set<Album> albums = new HashSet<>();
 
 
-    //Getters & setters
 
+  public Artist() {
+    }
 
     public Long getId() {
         return id;
@@ -38,6 +43,23 @@ public class Artist {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
+    }
+
 
 
 }
