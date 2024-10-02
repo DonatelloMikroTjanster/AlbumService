@@ -30,6 +30,11 @@ public class Media {
     @Column(name = "duration", nullable = false, length = 100)
     private String duration;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "album_id")
+
+    private Album album;
+
     public Media() {
 
     }
@@ -88,5 +93,13 @@ public class Media {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }
