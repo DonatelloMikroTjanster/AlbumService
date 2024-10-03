@@ -35,7 +35,7 @@ public class MediaService {
         if (mediaOptional.isPresent()) {
             Media media = mediaOptional.get();
             media.setTitle(mediaDetails.getTitle());
-            media.setMediaCategory(mediaDetails.getMediaCategory());
+            media.setMediaType(mediaDetails.getMediaType());
             return mediaRepository.save(media);
         } else {
             throw new RuntimeException("Media not found");

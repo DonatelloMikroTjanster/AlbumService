@@ -16,8 +16,10 @@ public class Artist {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "genre", nullable = false, length = 100)
-    private String genre;
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
+
 
     @ManyToMany(mappedBy = "artists", fetch = FetchType.LAZY)
     private Set<Album> albums = new HashSet<>();
@@ -43,11 +45,11 @@ public class Artist {
         this.name = name;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
@@ -58,7 +60,4 @@ public class Artist {
     public void setAlbums(Set<Album> albums) {
         this.albums = albums;
     }
-
-
-
 }
