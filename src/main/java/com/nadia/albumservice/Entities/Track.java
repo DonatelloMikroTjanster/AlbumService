@@ -10,7 +10,6 @@ public class Track {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "title", nullable = false, length = 200)
@@ -26,6 +25,8 @@ public class Track {
 
     //getters & setters
 
+    public Track() {
+    }
 
     public Long getId() {
         return id;
@@ -39,8 +40,8 @@ public class Track {
         return title;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDate getReleaseDate() {
@@ -49,5 +50,13 @@ public class Track {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }

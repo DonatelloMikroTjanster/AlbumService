@@ -36,7 +36,7 @@ public class AlbumService {
         Optional<Album> albumOptional = albumRepository.findById(id);
         if (albumOptional.isPresent()) {
             Album album = albumOptional.get();
-            album.setTitle(albumDetails.getTitle());
+            album.setName(albumDetails.getName());
             album.setReleaseDate(albumDetails.getReleaseDate());
             return albumRepository.save(album);
         } else {

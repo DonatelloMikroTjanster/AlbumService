@@ -1,9 +1,15 @@
 package com.nadia.albumservice.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "media")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Media {
 
     @Id
@@ -11,15 +17,41 @@ public class Media {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 200)
+    @Column(name = "title", length = 100)
     private String title;
 
-    @Column(name = "media_category", nullable = false, length = 150)
-    private String mediaCategory;
+    @Column (name = "media_type", length = 100)
+    private String mediaType;
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
+
+    @Column(name = "release_date", length = 100)
+    private LocalDate releaseDate;
+
+    @Column(name = "url", length = 100)
+    private String url;
+
+    @Column(name = "duration", length = 100)
+    private String duration;
 
 
-    //getters & setters
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "album_id")
 
+    private Album album;
+
+    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "media_artist",
+            joinColumns = @JoinColumn(name = "media_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id"))
+    private Set<Artist> artists = new HashSet<>();
+
+
+    public Media() {
+
+    }
 
     public Long getId() {
         return id;
@@ -37,11 +69,59 @@ public class Media {
         this.title = title;
     }
 
-    public String getMediaCategory() {
-        return mediaCategory;
+    public String getMediaType() {
+        return mediaType;
     }
 
-    public void setMediaCategory(String mediaCategory) {
-        this.mediaCategory = mediaCategory;
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
     }
 }
